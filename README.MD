@@ -40,15 +40,22 @@ dodocx /path/to/folder
 ```
 
 ### 命令行参数
+
+```bash
 usage: dodocx [-h] [--recursive] [--version] [--quiet] [--rules RULES] path
+
 位置参数:
 path 指定要处理的Word文档路径或文件夹路径
+
 可选参数:
 -h, --help 显示帮助信息
 --recursive, -r 递归处理子文件夹中的所有docx文件
 --version, -v 显示程序版本信息
 --quiet, -q 安静模式，不显示处理进度
 --rules RULES 指定自定义规则文件路径
+```
+
+
 
 ### 自定义格式规则
 你可以通过 YAML 文件自定义文档格式规则。创建一个 `rules.yaml` 文件：
