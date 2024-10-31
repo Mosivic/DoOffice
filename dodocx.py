@@ -209,80 +209,69 @@ def format_title_section(doc_path, custom_rules=None):
     # 保存修改后的文档
     doc.save(doc_path)
 
+
 def main():
     # 创建参数解析器
     parser = argparse.ArgumentParser(
-        description='Docx Tool By Furo v0.2.0',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog='''
-====================================================================================================================
- ______   __  __     ______     ______        _____     ______     _____     ______     ______     __  __    
-/\  ___\ /\ \/\ \   /\  == \   /\  __ \      /\  __-.  /\  __ \   /\  __-.  /\  __ \   /\  ___\   /\_\_\_\   
-\ \  __\ \ \ \_\ \  \ \  __<   \ \ \/\ \     \ \ \/\ \ \ \ \/\ \  \ \ \/\ \ \ \ \/\ \  \ \ \____  \/_/\_\/_  
- \ \_\    \ \_____\  \ \_\ \_\  \ \_____\     \ \____-  \ \_____\  \ \____-  \ \_____\  \ \_____\   /\_\/\_\ 
-  \/_/     \/_____/   \/_/ /_/   \/_____/      \/____/   \/_____/   \/____/   \/_____/   \/_____/   \/_/\/_/ 
-:FuroDoDocx
-====================================================================================================================
-
-命令参数说明:
-  path                  指定要处理的Word文档路径或文件夹路径
-                         支持单个文件或整个目录的批量处理
-                         例如: document.docx 或 /path/to/folder
-
-  -r, --recursive       递归处理子文件夹中的所有docx文件
-                         如果指定此参数，将处理指定目录及其所有子目录中的文档
-                         例如: -r 或 --recursive
-
-  -v, --version         显示程序版本信息
-                         显示当前工具的版本号
-                         例如: -v 或 --version
-
-  -q, --quiet           安静模式，不显示处理进度
-                         运行时不输出处理状态和进度信息
-                         例如: -q 或 --quiet
-
-  --rules               指定自定义规则文件路径
-                         使用YAML格式的自定义规则文件覆盖默认格式设置
-                         例如: --rules custom_rules.yaml
-
-
-使用示例:
-  %(prog)s document.docx                     # 处理单个文档
-  %(prog)s /path/to/folder                   # 处理文件夹下的所有文档
-  %(prog)s /path/to/folder -r                # 处理文件夹内的所有文档
-  %(prog)s document.docx --rules rules.yaml  # 使用自定义规则处理文档
-        '''
+        description='''
+__________                         ________      ________                    
+___  ____/___  ______________      ___  __ \________  __ \_______________  __
+__  /_   _  / / /_  ___/  __ \     __  / / /  __ \_  / / /  __ \  ___/_  |/_/
+_  __/   / /_/ /_  /   / /_/ /     _  /_/ // /_/ /  /_/ // /_/ / /__ __>  <  
+/_/      \__,_/ /_/    \____/      /_____/ \____//_____/ \____/\___/ /_/|_|                                                                           
+''',
+        formatter_class=argparse.RawTextHelpFormatter,
     )
     
     # 添加参数
     parser.add_argument(
         'path',
-        help='Word文档路径或文件夹路径'
+        help='''
+指定要处理的Word文档路径或文件夹路径
+支持单个文件或整个目录的批量处理
+例如: document.docx 或 /path/to/folder
+'''
     )
     
     parser.add_argument(
         '--recursive', '-r',
         action='store_true',
-        help='递归处理子文件夹中的文档'
+        help='''
+递归处理子文件夹中的所有docx文件
+如果指定此参数，将处理指定目录及其所有子目录中的文档
+例如: -r 或 --recursive
+'''
     )
     
     parser.add_argument(
         '--version', '-v',
         action='version',
         version='%(prog)s 0.2.0',
-        help='显示程序版本'
+        help='''
+显示程序版本信息
+显示当前工具的版本号
+例如: -v 或 --version
+'''
     )
     
     parser.add_argument(
         '--quiet', '-q',
         action='store_true',
-        help='安静模式，不显示处理进度'
+        help='''
+安静模式，不显示处理进度
+运行时不输出处理状态和进度信息
+例如: -q 或 --quiet
+'''
     )
     
     parser.add_argument(
         '--rules',
         type=str,
-        help='自定义规则的YAML文件路径，用于覆盖默认格式设置'
+        help='''
+指定自定义规则文件路径
+使用YAML格式的自定义规则文件覆盖默认格式设置
+例如: --rules custom_rules.yaml
+'''
     )
     
     # 解析命令行参数
