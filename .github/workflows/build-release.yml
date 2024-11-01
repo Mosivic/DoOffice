@@ -59,12 +59,3 @@ jobs:
         asset_name: DoOffice_${{ steps.get_version.outputs.version }}_win_x64.zip
         asset_content_type: application/zip
         
-    - name: Upload Release Asset (EXE)
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/DoOffice.exe
-        asset_name: DoOffice.exe
-        asset_content_type: application/octet-stream 
