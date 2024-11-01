@@ -126,9 +126,9 @@ def extract_images(docx_path, output_folder='extracted_images', backup=True, rem
         print("\n文档保持不变，仅提取了图片")
 
 
-def extract_text(docx_path, save=False, save_path='extracted_text'):
+def extract_markdown(docx_path, save=False, output_folder='extracted_text'):
     if not os.path.exists(docx_path):
-        print(f"错误: 找不到文件 '{docx_path}'")
+        print(f"错误: 找不到文件 '{docx_path}'")    
         return None
     
     try:
@@ -192,11 +192,11 @@ def extract_text(docx_path, save=False, save_path='extracted_text'):
         
         # 如果需要保存文件
         if save:
-            if not os.path.exists(save_path):
-                os.makedirs(save_path)
+            if not os.path.exists(output_folder):
+                os.makedirs(output_folder)
             
             base_name = os.path.splitext(os.path.basename(docx_path))[0]
-            output_file = os.path.join(save_path, f'{base_name}.md')
+            output_file = os.path.join(output_folder, f'{base_name}.md')
             
             try:
                 with open(output_file, 'w', encoding='utf-8') as f:
@@ -212,7 +212,7 @@ def extract_text(docx_path, save=False, save_path='extracted_text'):
         return None
 
 def test_extract_text():
-    extract_text('test/test.docx', save=True, save_path='test')
+    extract_text('test/test.docx', save=True, output_folder='test')
     
 if __name__ == '__main__':
     test_extract_text()
