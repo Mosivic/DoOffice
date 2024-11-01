@@ -3,3 +3,4 @@ test/
 dist/
 __pycache__/
 .env
+*.spec
