@@ -1,0 +1,33 @@
+strategies:
+- input_format: '{{text}}'
+  model: openrouter/openai/gpt-4o-mini
+  output_name: guina
+  prompt_name: guina
+- input_format: 'original text:
+
+    {{text}}
+
+    translation:
+
+    {{translation}}
+
+    '
+  model: openrouter/anthropic/claude-3.5-sonnet
+  output_name: guina
+  prompt_name: guina
+- input_format: 'original text:
+
+    {{text}}
+
+    translation:
+
+    {{translation}}
+
+    comments:
+
+    {{reflection}}
+
+    '
+  model: openrouter/openai/gpt-4o-mini
+  output_name: guina
+  prompt_name: guina
