@@ -21,62 +21,61 @@ DoOffice 是一个专门用于处理中文 Word 文档的命令行工具。它�
   - 智能识别标题层级和特殊格式
 
 ## 🛠️ 安装
-1. 从 [Releases](https://github.com/mosivic/dooffice/releases) 页面下载最新版本
+1. 从 [Releases](https://github.com/mosivic/dooffice/releases) 页面下载最新版本的压缩包
 2. 解压下载的压缩包到任意目录
 3. 将该目录添加到系统环境变量 PATH 中
-4. 打开命令提示符或 PowerShell，输入 `dodocx --version` 验证安装
+4. 打开命令提示符或 PowerShell，输入 `dodocx -v` 验证安装
 
 ## 📖 使用说明
 
 ### 格式化文档
 处理单个文档：
 ```bash
-dodocx format document.docx
+dodocx --mode format path/to/document.docx
 ```
 
 处理整个目录：
 ```bash
-dodocx format /path/to/folder -r
+dodocx --mode format path/to/folder --recursive
 ```
 
 ### 提取图片
-从文档中提取图片：
+从文档中提取图片（默认保存在文档所在目录）：
 ```bash
-dodocx extract image document.docx -o output_folder
+dodocx --mode extract-images path/to/document.docx
 ```
 
 提取并删除文档中的图片：
 ```bash
-dodocx extract image document.docx --remove-images
+dodocx --mode extract-images path/to/document.docx --remove-images
+```
+
+指定输出目录：
+```bash
+dodocx --mode extract-images path/to/document.docx -o output_folder
 ```
 
 ### 转换为 Markdown
 将文档转换为 Markdown 格式：
 ```bash
-dodocx extract markdown document.docx
+dodocx --mode extract-markdown path/to/document.docx
 ```
 
 ### 命令行参数
 
 ```bash
-usage: dodocx [-h] [--version] {format,extract} ...
+usage: dodocx [-h] [-v] --mode {format,extract-images,extract-markdown} ...
 
-子命令：
-  format              格式化文档
-  extract             提取文档内容
-
-format 命令参数:
-  -r, --recursive     递归处理子文件夹
-  --rules RULES       指定自定义规则文件
-  -q, --quiet        安静模式
-
-extract image 命令参数:
+参数:
+  path                  指定要处理的Word文档路径或文件夹路径
+  -m， --mode            指定要执行的命令 (format/extract-images/extract-markdown)
+  -r, --recursive      递归处理子文件夹
+  -q, --quiet         安静模式
+  --rules RULES       指定自定义规则文件 (仅用于 format 命令)
   -o OUTPUT          指定输出文件夹
-  --no-backup        不创建备份
-  --remove-images    删除文档中的图片
-
-extract markdown 命令参数:
-  -o OUTPUT          指定输出文件夹
+  --no-backup        不创建备份 (仅用于 extract-images 命令)
+  --remove-images    删除文档中的图片 (仅用于 extract-images 命令)
+  -v, --version      显示版本号
 ```
 
 ### 自定义格式规则
@@ -111,7 +110,7 @@ content:
 
 - 仅支持 .docx 格式文件
 - 建议在处理重要文档前先创建备份
-- 图片提取默认会自动创建备份文件
+- 图片提取默认会保存在文档所在目录
 - Markdown 转换会保持文档的层级结构
 - 格式化时会保持文档内容不变，仅调整格式
 
