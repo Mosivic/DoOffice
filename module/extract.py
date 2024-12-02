@@ -46,7 +46,7 @@ def extract_images(docx_path, output_folder='extracted_images', backup=True, rem
                 
                 # 生成图片文件名
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                image_filename = f'image_{timestamp}_{image_count}.png'
+                image_filename = f'image_{timestamp}_{image_count}.jpg'
                 image_path = os.path.join(output_folder, image_filename)
                 
                 # 保存图片

@@ -61,14 +61,19 @@ dooffice --mode extract-images path/to/document.docx -o output_folder
 dooffice --mode extract-markdown path/to/document.docx
 ```
 
+### 重命名文件夹
+将指定目录下的文件夹重命名为其内部第一个 doc/docx 文件的名称：
+```bash
+dooffice --mode rename-folder path/to/folder 
+
 ### 命令行参数
 
 ```bash
-usage: dooffice [-h] [-v] --mode {format,extract-images,extract-markdown} ...
+usage: dooffice [-h] [-v] --mode {format,extract-images,extract-markdown,rename-folder} ...
 
 参数:
   path                  指定要处理的Word文档路径或文件夹路径
-  -m， --mode            指定要执行的命令 (format/extract-images/extract-markdown)
+  -m， --mode            指定要执行的命令 (format/extract-images/extract-markdown/rename-folder)
   -r, --recursive      递归处理子文件夹
   -q, --quiet         安静模式
   --rules RULES       指定自定义规则文件 (仅用于 format 命令)

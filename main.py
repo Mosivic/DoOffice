@@ -1,17 +1,18 @@
-import format
-import extract
+from module import format
+from module import extract
+from module import tool
 import argparse
 from pathlib import Path
 
-VERSION = "v0.3.1"  
+VERSION = "v0.3.2"  
 
 def main():
     # 创建主参数解析器
     parser = argparse.ArgumentParser(
-        description='''
-__________                         ________      ________                    
-___  ____/___  ______________      ___  __ \________  __ \_______________  __
-__  /_   _  / / /_  ___/  __ \     __  / / /  __ \_  / / /  __ \  ___/_  |/_/
+        description=r'''
+_________                         ________      ________                    
+___  ___/___  ______________      ___  __ \________  __ \_______________  __
+__  __   _  / / /_  ___/  __ \     __  / / /  __ \_  / / /  __ \  ___/_  |/_/
 _  __/   / /_/ /_  /   / /_/ /     _  /_/ // /_/ /  /_/ // /_/ / /__ __>  <  
 /_/      \__,_/ /_/    \____/      /_____/ \____//_____/ \____/\___/ /_/|_|                                                                           
 ''',
@@ -45,7 +46,7 @@ _  __/   / /_/ /_  /   / /_/ /     _  /_/ // /_/ /  /_/ // /_/ / /__ __>  <
     # 添加命令选项
     parser.add_argument(
         '-m','--mode',
-        choices=['format', 'extract-images', 'extract-markdown'],
+        choices=['format', 'extract-images', 'extract-markdown', 'rename-folder'],
         required=True,
         help='指定执行模式'
     )
@@ -100,7 +101,10 @@ _  __/   / /_/ /_  /   / /_/ /     _  /_/ // /_/ /  /_/ // /_/ / /__ __>  <
         process_single_file(args, path, custom_rules)
     # 处理目录
     elif path.is_dir():
-        process_directory(args, path, custom_rules)
+        if args.mode == 'rename-folder':
+            tool.rename_folders_by_doc(str(path))
+        else:
+            process_directory(args, path, custom_rules)
     else:
         print(f"Error: Path {path} does not exist")
 
